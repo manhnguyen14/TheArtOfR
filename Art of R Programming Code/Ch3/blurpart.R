@@ -8,5 +8,15 @@ blurpart <- function(img,rows,cols,q) {
   newimg <- img
   randomnoise <- matrix(nrow=lrows, ncol=ncols,runif(lrows*lcols))
   newimg@grey <- (1-q) * img@grey + q * randomnoise
+  #the function above is wrong
+  #alternative: below
   return(newimg)
 }
+blurpart <- function(img,rows,cols,q) {
++     lrows <- length(rows)
++     lcols <- length(cols)
++     newimg <- img
++     randomnoise <- matrix(nrow=lrows, ncol=lcols,runif(lrows*lcols))
++     newimg@grey[rows, cols] <- (1-q)*img@grey[rows,cols] + q*randomnoise
++     return(newimg)
++ }
